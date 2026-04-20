@@ -1,0 +1,18 @@
+# render.yaml — Deploy to Render.com (free tier available)
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: yt-team
+    env: node
+    region: singapore          # change to: oregon / frankfurt / ohio
+    plan: free                 # free | starter | standard
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/stats
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true    # Render auto-generates a secure random value
+      # PORT is set automatically by Render — do not add it here
